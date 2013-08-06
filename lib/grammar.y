@@ -1,0 +1,115 @@
+class Parser
+
+token CAN
+token AS
+
+token IF ELSE
+token NEWLINE
+token NUMBER
+token STRING
+token TRUE FALSE NIL
+token IDENTIFIER
+token CONSTANT
+token INDENT DEDENT
+
+rule
+
+  Root:
+    /* nothing */         { result = Nodes.new([]) }
+  | Expressions           { result = val[0] }
+  ;
+
+  Expressions:
+    Expression                        { result = Nodes.new(val) }
+  | Expressions Terminator Expression { result = val[0] << val[2] }
+  | Expressions Terminator            { result = Nodes.new([val[0]]) }
+  ;
+
+  Expression:
+    Literal
+  | Call
+  | Constant
+  | Assign
+  | Can
+  | As
+  | If
+  ;
+
+  Terminator:
+    NEWLINE
+  | ";"
+  ;
+
+  Literal:
+    NUMBER    { result = LiteralNode.new(val[0]) }
+  | STRING    { result = LiteralNode.new(val[0]) }
+  | TRUE      { result = LiteralNode.new(true) }
+  | FALSE     { result = LiteralNode.new(false) }
+  | NIL       { result = LiteralNode.new(nil) }
+  ;
+
+  Call:
+    IDENTIFIER                  { result = CallNode.new(nil, val[0]) }
+  | IDENTIFIER "(" ArgList ")"  { result = CallNode.new(nil, val[0], val[2]) }
+  | Expression "." IDENTIFIER   { result = CallNode.new(val[0], val[2]) }
+  | Expression "."
+      IDENTIFIER "(" ArgList ")" { result = CallNode.new(val[0], val[2], val[4])}
+  ;
+
+  ArgList:
+    /* nothing */             { result = [] }
+  | Expression                { result = val }
+  | ArgList "," Expression    { result = val[0] << val[2] }
+  ;
+
+  Constant:
+    CONSTANT        { result = GetConstantNode.new(val[0]) }
+  ;
+
+  Assign:
+    IDENTIFIER "=" Expression     { result = SetLocalNode.new(val[0], val[2]) }
+  | CONSTANT "=" Expression       { result = SetConstantNode.new(val[0], val[2]) }
+  ;
+
+  Can:
+    CAN IDENTIFIER Block        { result = DefNode.new(val[1], [], val[2]) }
+  | CAN IDENTIFIER
+      "(" ParamList ")" Block   { result = DefNode.new(val[1], val[3], val[5]) }
+  ;
+
+  ParamList:
+    /* nothing */             { result = [] }
+  | IDENTIFIER                { result = val }
+  | ParamList "," IDENTIFIER  { result = val[0] << val[2] }
+  ;
+
+  As:
+    AS CONSTANT Block   { result = val[0] << val[2] }
+  ;
+
+  If:
+    IF Expression Block       { result = IfNode.new(val[1], val[2]) }
+  | IF Expression Block NEWLINE
+    ELSE Block                { result = IfNode.new(val[1], val[2], val[5]) }
+  ;
+
+  Block:
+    INDENT Expressions DEDENT   { result = val[1] }
+  ;
+end
+
+---- header
+  require "lexer"
+  require "nodes"
+
+---- inner
+  def parse(code, show_tokens=false)
+    @tokens = Lexer.new.tokenize(code)
+    puts @tokens.inspect if show_tokens
+    do_parse
+  end
+
+  def next_token
+    @tokens.shift
+  end
+end
