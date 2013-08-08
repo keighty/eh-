@@ -21,7 +21,6 @@ module_eval(<<'...end grammar.y/module_eval...', 'grammar.y', 106)
   def next_token
     @tokens.shift
   end
-end
 ...end grammar.y/module_eval...
 ##### State transition tables begin ###
 
@@ -216,8 +215,8 @@ Racc_token_to_s_table = [
   "Call",
   "Constant",
   "Assign",
-  "Can",
-  "As",
+  "Def",
+  "Class",
   "If",
   "ArgList",
   "Block",

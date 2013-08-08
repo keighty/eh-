@@ -30,8 +30,8 @@ rule
   | Call
   | Constant
   | Assign
-  | Can
-  | As
+  | Def
+  | Class
   | If
   ;
 
@@ -71,7 +71,7 @@ rule
   | CONSTANT "=" Expression       { result = SetConstantNode.new(val[0], val[2]) }
   ;
 
-  Can:
+  Def:
     CAN IDENTIFIER Block        { result = DefNode.new(val[1], [], val[2]) }
   | CAN IDENTIFIER
       "(" ParamList ")" Block   { result = DefNode.new(val[1], val[3], val[5]) }
@@ -83,7 +83,7 @@ rule
   | ParamList "," IDENTIFIER  { result = val[0] << val[2] }
   ;
 
-  As:
+  Class:
     AS CONSTANT Block   { result = val[0] << val[2] }
   ;
 
@@ -112,4 +112,3 @@ end
   def next_token
     @tokens.shift
   end
-end

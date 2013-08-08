@@ -14,8 +14,8 @@ rule 6 Expression: Literal
 rule 7 Expression: Call
 rule 8 Expression: Constant
 rule 9 Expression: Assign
-rule 10 Expression: Can
-rule 11 Expression: As
+rule 10 Expression: Def
+rule 11 Expression: Class
 rule 12 Expression: If
 rule 13 Terminator: NEWLINE
 rule 14 Terminator: ";"
@@ -34,12 +34,12 @@ rule 26 ArgList: ArgList "," Expression
 rule 27 Constant: CONSTANT
 rule 28 Assign: IDENTIFIER "=" Expression
 rule 29 Assign: CONSTANT "=" Expression
-rule 30 Can: CAN IDENTIFIER Block
-rule 31 Can: CAN IDENTIFIER "(" ParamList ")" Block
+rule 30 Def: CAN IDENTIFIER Block
+rule 31 Def: CAN IDENTIFIER "(" ParamList ")" Block
 rule 32 ParamList: 
 rule 33 ParamList: IDENTIFIER
 rule 34 ParamList: ParamList "," IDENTIFIER
-rule 35 As: AS CONSTANT Block
+rule 35 Class: AS CONSTANT Block
 rule 36 If: IF Expression Block
 rule 37 If: IF Expression Block NEWLINE ELSE Block
 rule 38 Block: INDENT Expressions DEDENT
@@ -75,10 +75,10 @@ rule 38 Block: INDENT Expressions DEDENT
   Assign (30)
     on right: 9
     on left : 28 29
-  Can (31)
+  Def (31)
     on right: 10
     on left : 30 31
-  As (32)
+  Class (32)
     on right: 11
     on left : 35
   If (33)
@@ -143,8 +143,8 @@ state 0
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
 
 state 1
@@ -205,14 +205,14 @@ state 7
 
 state 8
 
-  10) Expression : Can _
+  10) Expression : Def _
 
   $default      reduce using rule 10 (Expression)
 
 
 state 9
 
-  11) Expression : As _
+  11) Expression : Class _
 
   $default      reduce using rule 11 (Expression)
 
@@ -281,15 +281,15 @@ state 17
 
 state 18
 
-  30) Can : CAN _ IDENTIFIER Block
-  31) Can : CAN _ IDENTIFIER "(" ParamList ")" Block
+  30) Def : CAN _ IDENTIFIER Block
+  31) Def : CAN _ IDENTIFIER "(" ParamList ")" Block
 
   IDENTIFIER    shift, and go to state 29
 
 
 state 19
 
-  35) As : AS _ CONSTANT Block
+  35) Class : AS _ CONSTANT Block
 
   CONSTANT      shift, and go to state 30
 
@@ -314,8 +314,8 @@ state 20
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   Expression    go to state 31
 
@@ -347,8 +347,8 @@ state 22
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
 
 state 23
@@ -393,8 +393,8 @@ state 26
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   ArgList       go to state 35
   Expression    go to state 36
@@ -418,8 +418,8 @@ state 27
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   Expression    go to state 37
 
@@ -442,15 +442,15 @@ state 28
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   Expression    go to state 38
 
 state 29
 
-  30) Can : CAN IDENTIFIER _ Block
-  31) Can : CAN IDENTIFIER _ "(" ParamList ")" Block
+  30) Def : CAN IDENTIFIER _ Block
+  31) Def : CAN IDENTIFIER _ "(" ParamList ")" Block
 
   INDENT        shift, and go to state 41
   "("           shift, and go to state 40
@@ -459,7 +459,7 @@ state 29
 
 state 30
 
-  35) As : AS CONSTANT _ Block
+  35) Class : AS CONSTANT _ Block
 
   INDENT        shift, and go to state 41
 
@@ -545,14 +545,14 @@ state 38
 
 state 39
 
-  30) Can : CAN IDENTIFIER Block _
+  30) Def : CAN IDENTIFIER Block _
 
-  $default      reduce using rule 30 (Can)
+  $default      reduce using rule 30 (Def)
 
 
 state 40
 
-  31) Can : CAN IDENTIFIER "(" _ ParamList ")" Block
+  31) Def : CAN IDENTIFIER "(" _ ParamList ")" Block
 
   IDENTIFIER    shift, and go to state 48
   $default      reduce using rule 32 (ParamList)
@@ -580,15 +580,15 @@ state 41
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
 
 state 42
 
-  35) As : AS CONSTANT Block _
+  35) Class : AS CONSTANT Block _
 
-  $default      reduce using rule 35 (As)
+  $default      reduce using rule 35 (Class)
 
 
 state 43
@@ -621,8 +621,8 @@ state 44
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   Expression    go to state 36
   ArgList       go to state 51
@@ -653,14 +653,14 @@ state 46
   Call          go to state 5
   Constant      go to state 6
   Assign        go to state 7
-  Can           go to state 8
-  As            go to state 9
+  Def           go to state 8
+  Class         go to state 9
   If            go to state 10
   Expression    go to state 52
 
 state 47
 
-  31) Can : CAN IDENTIFIER "(" ParamList _ ")" Block
+  31) Def : CAN IDENTIFIER "(" ParamList _ ")" Block
   34) ParamList : ParamList _ "," IDENTIFIER
 
   ")"           shift, and go to state 53
@@ -714,7 +714,7 @@ state 52
 
 state 53
 
-  31) Can : CAN IDENTIFIER "(" ParamList ")" _ Block
+  31) Def : CAN IDENTIFIER "(" ParamList ")" _ Block
 
   INDENT        shift, and go to state 41
 
@@ -751,9 +751,9 @@ state 57
 
 state 58
 
-  31) Can : CAN IDENTIFIER "(" ParamList ")" Block _
+  31) Def : CAN IDENTIFIER "(" ParamList ")" Block _
 
-  $default      reduce using rule 31 (Can)
+  $default      reduce using rule 31 (Def)
 
 
 state 59
