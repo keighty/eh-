@@ -1,4 +1,3 @@
-# Collection of nodes each one representing an expression.
 class Nodes
   def initialize(nodes)
     @nodes = nodes
@@ -9,22 +8,18 @@ class Nodes
     self
   end
 
-  # This method is the "interpreter" part of our language. All nodes know how to eval itself and returns the result of its evaluation by implementing the "eval" method. The "context" variable is the environment in which the node is evaluated (local variables, current class, etc.).
+  # last node is return value
   def eval(context)
-    # The last value evaluated in a method is the return value.
     @nodes.map { |node| node.eval(context) }.last
   end
 end
 
-# Literals are static values that have a Ruby representation, eg.: a string, a number,
-# true, false, nil, etc.
 class LiteralNode
   def initialize(value)
     @value = value
   end
 
   def eval(context)
-    # Here we access the Runtime, which we'll see in the next section.
     case @value
     when Numeric
       Runtime["Number"].new_value(@value)
@@ -42,13 +37,6 @@ class LiteralNode
   end
 end
 
-# Node of a method call or local variable access, can take any of these forms:
-#
-#   method # this form can also be a local variable
-#   method(argument1, argument2)
-#   receiver.method
-#   receiver.method(argument1, argument2)
-#
 class CallNode
   def initialize(receiver, method, arguments=[])
     @receiver = receiver
@@ -56,17 +44,11 @@ class CallNode
     @arguments = arguments
   end
 
+  # handles method calls with and without params
   def eval(context)
-    # If there's no receiver and the method name is the name of a local variable, then
-    # it's a local variable access. This trick allows us to skip the () when calling a
-    # method.
     if @receiver.nil? && context.locals[@method] && @arguments.empty?
       context.locals[@method]
-
-    # Method call
     else
-      # In case there's no receiver we default to self, calling "print" is like
-      # "self.print".
       if @receiver
         receiver = @receiver.eval(context)
       else
@@ -78,7 +60,6 @@ class CallNode
   end
 end
 
-# Retrieving the value of a constant.
 class GetConstantNode
   def initialize(name)
     @name = name
@@ -89,7 +70,6 @@ class GetConstantNode
   end
 end
 
-# Setting the value of a constant.
 class SetConstantNode
   def initialize(name, value)
     @name = name
@@ -101,7 +81,6 @@ class SetConstantNode
   end
 end
 
-# Setting the value of a local variable.
 class SetLocalNode
   def initialize(name, value)
     @name = name
@@ -113,7 +92,6 @@ class SetLocalNode
   end
 end
 
-# Method definition.
 class DefNode
   def initialize(name, params, body)
     @name = name
@@ -122,12 +100,10 @@ class DefNode
   end
 
   def eval(context)
-    # Defining a method is adding a method to the current class.
     context.current_class.awesome_methods[@name] = AwesomeMethod.new(@params, @body)
   end
 end
 
-# Class definition.
 class ClassNode
   def initialize(name, body)
     @name = name
@@ -135,21 +111,13 @@ class ClassNode
   end
 
   def eval(context)
-    # Create the class and put it's value in a constant.
     awesome_class = AwesomeClass.new
     context[@name] = awesome_class
-
-    # Evaluate the body of the class in its context. Providing a custom context allows
-    # to control where methods are added when defined with the def keywork. In this
-    # case, we add them to the newly created class.
     @body.eval(Context.new(awesome_class, awesome_class))
-
     awesome_class
   end
 end
 
-# "if-else" control structure. Look at this node if you want to implement other control
-# structures like while, for, loop, etc.
 class IfNode
   def initialize(condition, body, else_body=nil)
     @condition = condition
@@ -158,8 +126,6 @@ class IfNode
   end
 
   def eval(context)
-    # We turn the condition node into a Ruby value to use Ruby's "if" control
-    # structure.
     if @condition.eval(context).ruby_value
       @body.eval(context)
     elsif @else_body
