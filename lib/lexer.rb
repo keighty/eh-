@@ -1,52 +1,40 @@
 class Lexer
-  KEYWORDS = ['as', 'have', 'can', 'while', 'if', 'true', 'false', 'nil']
+  KEYWORDS = ['a', 'can', 'if']
+  ENDING = ['eh']
 
   def tokenize(code)
-    #remove line breaks
     code.chomp!
-
-    #track current character
     i = 0
-
-    #parsed tokens
     tokens = []
-
-    #indentation level
     current_indent = 0
     indent_stack = []
 
     while i < code.size
       chunk = code[i..-1]
 
-      # match standard tokens
-      #
-      # match if, print, method names, etc
+      # checks keywords
       if identifier = chunk[/\A([a-z]\w*)/, 1]
-
-        # skip all a's (filler)
-        if identifier == 'a'
-          i += 1
-          next
-        end
-
-        # find keywords
         if KEYWORDS.include?(identifier)
           tokens << [identifier.upcase.to_sym, identifier]
+        elsif ENDING.include?(identifier)
+          i += 1
         else
           tokens << [:IDENTIFIER, identifier]
         end
         i += identifier.size
 
+      # checks for constants
       elsif constant = chunk[/\A([A-Z]\w*)/, 1]
         tokens << [:CONSTANT, constant]
         i += constant.size
-      elsif number = chunk[/\A([0-9]+)/, 1]
-        tokens << [:NUMBER, number.to_i]
-        i += number.size
+
+      # check for strings
       elsif string = chunk[/\A"(.*?)"/, 1]
         tokens << [:STRING, string]
         i += string.size + 2
-      elsif indent = chunk[/\A\:\n( +)/m, 1]
+
+      # checks for indents
+     elsif indent = chunk[/\A\:\n( +)/m, 1]
         if indent.size <= current_indent
           raise "Bad indent level: expected #{current_indent}"
         end
@@ -54,6 +42,7 @@ class Lexer
         indent_stack.push(current_indent)
         tokens << [:INDENT, indent.size]
         i += indent.size + 2
+
       elsif indent = chunk[/\A\n( *)/m, 1]
         if indent.size == current_indent
           tokens << [:NEWLINE, "\n"]
@@ -66,8 +55,10 @@ class Lexer
           raise "Missing ':'"
         end
         i += indent.size + 1
+
       elsif chunk.match(/\A /)
         i += 1
+
       else
         value = chunk[0,1]
         tokens << [value, value]
