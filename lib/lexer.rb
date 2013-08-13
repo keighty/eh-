@@ -1,6 +1,5 @@
 class Lexer
-  KEYWORDS = ['a', 'can', 'if']
-  ENDING = ['eh']
+  KEYWORDS = ['a', 'can', 'if', 'else', 'while', 'true', 'false', 'nil']
 
   def tokenize(code)
     code.chomp!
@@ -16,8 +15,6 @@ class Lexer
       if identifier = chunk[/\A([a-z]\w*)/, 1]
         if KEYWORDS.include?(identifier)
           tokens << [identifier.upcase.to_sym, identifier]
-        elsif ENDING.include?(identifier)
-          i += 1
         else
           tokens << [:IDENTIFIER, identifier]
         end
@@ -33,8 +30,13 @@ class Lexer
         tokens << [:STRING, string]
         i += string.size + 2
 
+      # check for numbers
+      elsif number = chunk[/\A([0-9]+)/, 1]
+        tokens << [:NUMBER, number.to_i]
+        i += number.size
+
       # checks for indents
-     elsif indent = chunk[/\A\:\n( +)/m, 1]
+      elsif indent = chunk[/\A\:\n( +)/m, 1]
         if indent.size <= current_indent
           raise "Bad indent level: expected #{current_indent}"
         end
@@ -43,7 +45,14 @@ class Lexer
         tokens << [:INDENT, indent.size]
         i += indent.size + 2
 
-      elsif indent = chunk[/\A\n( *)/m, 1]
+      elsif ending = chunk[/\A\n(eh\?)/, 1]
+        indent_stack.pop
+        current_indent = indent_stack.first || 0
+        tokens << [:DEDENT, current_indent]
+        tokens << [:NEWLINE, "\n"]
+        i += ending.size + 1
+
+      elsif indent = chunk[/\A\n( *)/, 1]
         if indent.size == current_indent
           tokens << [:NEWLINE, "\n"]
         elsif indent.size < current_indent
