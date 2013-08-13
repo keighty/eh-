@@ -9,3 +9,8 @@ desc 'Run parser specs'
 task :par do |t|
   exec 'rspec spec/parser_spec.rb'
 end
+
+desc 'Run runtime specs'
+task :runt do |t|
+  exec 'rspec spec/runtime_spec.rb'
+end
