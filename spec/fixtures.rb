@@ -7,8 +7,6 @@ if true:
   my_canadian = Canadian.new("brilliant!")
 else:
   weird
-
-
 EOS
 
 WHILE_EXPRESSION = <<-EOS
@@ -28,6 +26,14 @@ EOS
 NUMBER_EXPRESSION = <<-EOS
 if 5 < 7:
   print "true"
+eh?
+EOS
+
+BASIC_CLASS = <<-EOS
+a Factory:
+  can produce:
+    pass
+  eh?
 eh?
 EOS
 
