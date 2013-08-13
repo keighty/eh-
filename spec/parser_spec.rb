@@ -1,22 +1,17 @@
 require 'spec_helper'
+require 'fixtures'
+
+# racc -vo parser.rb grammar.y
 
 describe "Parser" do
-  CLASS_TEST = <<-EOS
-as Movie:
-  can initialize(name):
-    pass
+  it 'should parse a class definition' do
+    parser = Parser.new.parse(NEXT_SIMPLE)
+    x = parser.instance_variable_get(:@nodes)
 
-  can x:
-    2
+    expect(x.first.class).to be Nodes
 
-if true:
-  aw = Movie.new("brilliant!")
-else:
-  weird
-EOS
+    expect(parser.instance_variable_get(:@nodes).first.instance_variable_get(:@nodes).first.instance_variable_get(:@nodes).first.class).to be IfNode
 
-  # it 'should parse a class definition' do
-  #   # p Lexer.new.tokenize(CLASS_TEST)
-  #   p Parser.new.parse(CLASS_TEST)
-  # end
+    expect(parser.instance_variable_get(:@nodes).first.instance_variable_get(:@nodes).first.instance_variable_get(:@nodes).first.instance_variable_get(:@condition).class).to be LiteralNode
+  end
 end

@@ -2,10 +2,20 @@ SIMPLE = <<-EOS
 x < y
 EOS
 
+NEXT_SIMPLE = <<-EOS
+if true:
+  my_canadian = Canadian.new("brilliant!")
+else:
+  weird
+
+
+EOS
+
 WHILE_EXPRESSION = <<-EOS
 while x < y:
   print x
   x++
+eh?
 print "Done!!"
 EOS
 
@@ -15,12 +25,14 @@ if x < y:
 eh?
 EOS
 
-FULL_CLASS = <<-EOS
-a Canadian
-  with toque
-  with scarf
-  with broom
+NUMBER_EXPRESSION = <<-EOS
+if 5 < 7:
+  print "true"
+eh?
+EOS
 
+FULL_CLASS = <<-EOS
+a Canadian:
   can curl:
     if skip:
       say "Hurry!"
@@ -31,6 +43,23 @@ a Canadian
 
   can say_aboot:
     say "What's it all aboot?"
+  eh?
+eh?
+EOS
+
+BAD_DEDENT = <<-EOS
+a TestClass:
+  can test:
+    if x < y:
+  puts "something"
+  eh?
+eh?
+EOS
+
+BAD_INDENT = <<-EOS
+a TestClass:
+  can test
+    puts "something"
   eh?
 eh?
 EOS
