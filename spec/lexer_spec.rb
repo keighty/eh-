@@ -69,6 +69,10 @@ describe "Lexer" do
     end
   end
 
+  it "should parse a basic class" do
+    p @lex.tokenize(BASIC_CLASS)
+  end
+
   it "should check for bad indent level" do
     expect { @lex.tokenize(BAD_DEDENT) }.to raise_error
   end

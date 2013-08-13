@@ -56,6 +56,14 @@ a TestClass:
 eh?
 EOS
 
+BASIC_CLASS = <<-EOS
+a TestClass:
+  can go:
+    pass
+  eh?
+eh?
+EOS
+
 BAD_INDENT = <<-EOS
 a TestClass:
   can test
