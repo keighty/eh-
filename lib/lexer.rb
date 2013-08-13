@@ -12,7 +12,10 @@ class Lexer
       chunk = code[i..-1]
 
       # checks keywords
-      if identifier = chunk[/\A([a-z]\w*)/, 1]
+      if identifier = chunk[/\A(eh\?)/, 1]
+        i += identifier.size
+
+      elsif identifier = chunk[/\A([a-z]\w*)/, 1]
         if KEYWORDS.include?(identifier)
           tokens << [identifier.upcase.to_sym, identifier]
         else
@@ -44,13 +47,6 @@ class Lexer
         indent_stack.push(current_indent)
         tokens << [:INDENT, indent.size]
         i += indent.size + 2
-
-      elsif ending = chunk[/\A\n(eh\?)/, 1]
-        indent_stack.pop
-        current_indent = indent_stack.first || 0
-        tokens << [:DEDENT, current_indent]
-        tokens << [:NEWLINE, "\n"]
-        i += ending.size + 1
 
       elsif indent = chunk[/\A\n( *)/, 1]
         if indent.size == current_indent
