@@ -9,12 +9,9 @@ a Canadian
     if lead
       pass
     say "How social the game..."
-  eh?
 
   can say_aboot
     say "What's it all aboot?"
-  eh?
-eh?
 
 [:A, 'a'], [:CONSTANT, 'Canadian'],
 [:INDENT, 2], [:IDENTIFIER, 'with'],
