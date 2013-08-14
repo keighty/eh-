@@ -38,30 +38,16 @@ class Lexer
       # checks for block indentation
       elsif indent = chunk[/\A\:\n( +)/m, 1]
         if indent.size <= current_indent
-          raise "Bad indent level: expected #{current_indent}"
+          raise "Bad indent level, got #{indent.size} indents, " +
+                "expected > #{current_indent}"
         end
         current_indent = indent.size
         indent_stack.push(current_indent)
         tokens << [:INDENT, indent.size]
         i += indent.size + 2
 
-      # check for class ending
-      elsif ending = chunk[/\A\n(eh\?)/, 1]
-        indent_stack.pop
-        current_indent = indent_stack.first || 0
-        tokens << [:DEDENT, current_indent]
-        tokens << [:NEWLINE, "\n"]
-        i += ending.size + 1
-
       # check for other ending
-      elsif ending = chunk[/\A\n( *eh\?)/, 1]
-        indent_stack.pop
-        current_indent = indent_stack.first || 0
-        tokens << [:DEDENT, current_indent]
-        tokens << [:NEWLINE, "\n"]
-        i += ending.size + 1
-
-      elsif indent = chunk[/\A\n( *)/, 1]
+      elsif indent = chunk[/\A\n( *)/m, 1]
         if indent.size == current_indent
           tokens << [:NEWLINE, "\n"]
         elsif indent.size < current_indent
