@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'fixtures'
 
 # racc -vo parser.rb grammar.y
 

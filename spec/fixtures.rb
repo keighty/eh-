@@ -7,6 +7,8 @@ if true:
   my_canadian = Canadian.new("brilliant!")
 else:
   weird
+
+
 EOS
 
 WHILE_EXPRESSION = <<-EOS
@@ -49,12 +51,6 @@ a TestClass:
   can test:
     if x < y:
   puts "something"
-EOS
-
-BASIC_CLASS = <<-EOS
-a TestClass:
-  can go:
-    pass
 EOS
 
 BAD_INDENT = <<-EOS
