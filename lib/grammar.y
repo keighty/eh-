@@ -10,7 +10,6 @@ token STRING
 token TRUE FALSE NIL
 token IDENTIFIER
 token CONSTANT
-token INDENT DEDENT
 
 rule
 
@@ -94,7 +93,7 @@ rule
   ;
 
   Block:
-    INDENT Expressions DEDENT   { result = val[1] }
+    "{" Expressions "}"   { replace = val[1] }
   ;
 end
 

@@ -15,6 +15,10 @@ class Lexer
         tokens << ['}', '}']
         i += identifier.size
 
+      elsif chunk.match(/\A:/)
+        tokens << ['{', '{']
+        i += 1
+
       elsif identifier = chunk[/\A([a-z]\w*)/, 1]
         if KEYWORDS.include?(identifier)
           tokens << [identifier.upcase.to_sym, identifier]
