@@ -5,6 +5,7 @@
 * CAN: Crufty Attempt at Nerdiness
 
 ##Prototype language
+```
 a Canadian
   with toque
   with scarf
@@ -19,3 +20,4 @@ a Canadian
 
   can say_aboot
     say "What's it all aboot?"
+```
