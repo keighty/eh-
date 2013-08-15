@@ -5,17 +5,23 @@
 * CAN: Crufty Attempt at Nerdiness
 
 ##Prototype language
+```
 a Canadian
   with toque
   with scarf
   with broom
 
   can curl
-    if skip
+    if skip:
       say "Hurry!"
-    if lead
+    eh?
+    if lead:
       pass
+    eh?
     say "How social the game..."
-
-  can say_aboot
+  eh?
+  can say_aboot:
     say "What's it all aboot?"
+  eh?
+eh?
+```
