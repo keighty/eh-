@@ -32,8 +32,8 @@ BASIC_CLASS = <<-EOS
 a Factory:
   can produce:
     pass
-  eh?
-eh?
+
+
 EOS
 
 FULL_CLASS = <<-EOS
