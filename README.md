@@ -1,8 +1,6 @@
-#CAN
+#EH?
 
-* Oh yes I CAN!
-* CAN lang for CANadians
-* CAN: Crufty Attempt at Nerdiness
+A language for learning to program in the beautiful Canadian dialect.
 
 ##Prototype language
 ```
@@ -15,9 +13,17 @@ a Canadian
     if skip
       say "Hurry!"
     if lead
-      pass
-    say "How social the game..."
+      say "That's too much ice"
+    eh?
+  eh?
 
   can say_aboot
     say "What's it all aboot?"
+  eh?
+eh?
+```
+
+called from command line
+```bash
+$ canada example.eh
 ```
