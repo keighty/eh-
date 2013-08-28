@@ -84,7 +84,7 @@ rule
   ;
 
   Class:
-    A CONSTANT Block   { result = val[0] << val[2] }
+    A CONSTANT Block   { result = ClassNode.new(val[1], val[2]) }
   ;
 
   If:
