@@ -100,7 +100,7 @@ class DefNode
   end
 
   def eval(context)
-    context.current_class.awesome_methods[@name] = AwesomeMethod.new(@params, @body)
+    context.current_class.canadian_methods[@name] = CanadianMethod.new(@params, @body)
   end
 end
 
@@ -111,10 +111,10 @@ class ClassNode
   end
 
   def eval(context)
-    awesome_class = AwesomeClass.new
-    context[@name] = awesome_class
-    @body.eval(Context.new(awesome_class, awesome_class))
-    awesome_class
+    can_class = CanadianClass.new
+    context[@name] = can_class
+    @body.eval(Context.new(can_class, can_class))
+    can_class
   end
 end
 
