@@ -27,3 +27,7 @@ called from command line
 ```bash
 $ canada example.eh
 ```
+
+## Credits
+I am following the awesome book [Create Your Own Freaking Awesome Programming Language](http://createyourproglang.com/)
+by Marc-André Cournoyer
