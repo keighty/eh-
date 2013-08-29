@@ -26,3 +26,6 @@ a Canadian
   eh?
 eh?
 ```
+
+###Credit
+I am following the awesome book - [Create your own freaking awesome programming language by](http://createyourproglang.com/) by Marc-André Cournoyer
