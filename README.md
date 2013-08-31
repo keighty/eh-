@@ -1,10 +1,8 @@
-#CAN
+#Eh?
 
-* Oh yes I CAN!
-* CAN lang for CANadians
-* CAN: Crufty Attempt at Nerdiness
+A challenge to write a programming language patterned after Canadian stereotypes.
 
-##Prototype language
+###Prototype
 ```
 a Canadian
   with toque
@@ -27,5 +25,5 @@ a Canadian
 eh?
 ```
 
-###Credit
+####Credits
 I am following the awesome book - [Create your own freaking awesome programming language by](http://createyourproglang.com/) by Marc-André Cournoyer
