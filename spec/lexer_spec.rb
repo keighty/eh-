@@ -29,34 +29,28 @@ describe "Lexer" do
     @lex.tokenize("==").should eq [["=", "="], ["=", "="]]
   end
 
+  it 'tokenizes an eh? operator' do
+    @lex.tokenize("eh?").should eq [["}", "}"]]
+  end
+
   it 'parses simple operation' do
     @lex.tokenize(SIMPLE).should eq [[:IDENTIFIER, 'x'], ['<', '<'], [:IDENTIFIER, 'y']]
-  end
-
-  it 'parses if operations' do
-    @lex.tokenize(IF_EXPRESSION).should eq [[:IF, 'if'], [:IDENTIFIER, 'x'], ['<', '<'], [:IDENTIFIER, 'y'], [:INDENT, 2], [:IDENTIFIER, 'print'], [:STRING, 'special']]
-  end
-
-  it "should parse a while expression code" do
-    tokens = [[:WHILE, "while"], [:IDENTIFIER, "x"], [:INDENT, 2], [:NEWLINE, "\n"]]
-    tokens.each do |token|
-      @lex.tokenize(WHILE_EXPRESSION).should include token
-    end
-  end
-
-  it "should parse an if expression" do
-    tokens = [[:IF, "if"], [:INDENT, 2], [:IDENTIFIER, "print"]]
-    tokens.each do |token|
-      @lex.tokenize(IF_EXPRESSION).should include token
-    end
   end
 
   it "should parse a number expression" do
     @lex.tokenize(NUMBER_EXPRESSION).should include [:NUMBER, 5]
   end
 
+  it 'parses an if operation' do
+    @lex.tokenize(IF_EXPRESSION).should eq [[:IF, "if"], [:IDENTIFIER, "x"], ["<", "<"], [:IDENTIFIER, "y"], ["{", "{"], [:NEWLINE, "\n"], [:IDENTIFIER, "print"], [:STRING, "special"], [:NEWLINE, "\n"], ["}", "}"]]
+  end
+
+  it "parses a while expression" do
+    @lex.tokenize(WHILE_EXPRESSION).should eq [[:WHILE, "while"], [:IDENTIFIER, "x"], ["<", "<"], [:IDENTIFIER, "y"], ["{", "{"], [:NEWLINE, "\n"], [:IDENTIFIER, "print"], [:IDENTIFIER, "x"], [:NEWLINE, "\n"], [:IDENTIFIER, "x"], ["+", "+"], ["+", "+"], [:NEWLINE, "\n"], ["}", "}"], [:NEWLINE, "\n"], [:IDENTIFIER, "print"], [:STRING, "Done!!"]]
+  end
+
   it "should parse a full class definition" do
-    expect(@lex.tokenize(FULL_CLASS)).to eq [[:A, "a"], [:CONSTANT, "Canadian"], [:INDENT, 2], [:CAN, "can"], [:IDENTIFIER, "curl"], [:INDENT, 4], [:IF, "if"], [:IDENTIFIER, "skip"], [:INDENT, 6], [:IDENTIFIER, "say"], [:STRING, "Hurry!"], [:DEDENT, 0], [:NEWLINE, "\n"], [:NEWLINE, "\n"], [:CAN, "can"], [:IDENTIFIER, "say_aboot"], [:INDENT, 4], [:IDENTIFIER, "say"], [:STRING, "What's it all aboot?"]]
+    expect(@lex.tokenize(FULL_CLASS)).to eq [[:A, "a"], [:CONSTANT, "Canadian"], ["{", "{"], [:NEWLINE, "\n"], [:CAN, "can"], [:IDENTIFIER, "curl"], ["{", "{"], [:NEWLINE, "\n"], [:IF, "if"], [:IDENTIFIER, "skip"], ["{", "{"], [:NEWLINE, "\n"], [:IDENTIFIER, "say"], [:STRING, "Hurry!"], [:NEWLINE, "\n"], ["}", "}"], [:NEWLINE, "\n"], ["}", "}"], [:NEWLINE, "\n"], [:NEWLINE, "\n"], [:CAN, "can"], [:IDENTIFIER, "say_aboot"], ["{", "{"], [:NEWLINE, "\n"], [:IDENTIFIER, "say"], [:STRING, "What's it all aboot?"], [:NEWLINE, "\n"], ["}", "}"], [:NEWLINE, "\n"], ["}", "}"]]
   end
 
   it "should parse a method definition" do
@@ -71,11 +65,8 @@ describe "Lexer" do
     expect(@lex.tokenize(BASIC_CLASS)).not_to include [:IDENTIFIER, "eh"]
   end
 
-  it "should check for bad indent level" do
-    expect { @lex.tokenize(BAD_DEDENT) }.to raise_error
-  end
-
   it "should check for missing :" do
+    pending "implemented eh?"
     expect { @lex.tokenize(BAD_INDENT) }.to raise_error
   end
 end

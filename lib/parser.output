@@ -42,7 +42,7 @@ rule 34 ParamList: ParamList "," IDENTIFIER
 rule 35 Class: A CONSTANT Block
 rule 36 If: IF Expression Block
 rule 37 If: IF Expression Block NEWLINE ELSE Block
-rule 38 Block: INDENT Expressions DEDENT
+rule 38 Block: "{" Expressions "}"
 
 ------- Symbols -------
 
@@ -110,14 +110,14 @@ rule 38 Block: INDENT Expressions DEDENT
   NIL (11) 19
   IDENTIFIER (12) 20 21 22 23 28 30 31 33 34
   CONSTANT (13) 27 29 35
-  INDENT (14) 38
-  DEDENT (15) 38
-  ";" (16) 14
-  "(" (17) 21 23 31
-  ")" (18) 21 23 31
-  "." (19) 22 23
-  "," (20) 26 34
-  "=" (21) 28 29
+  ";" (14) 14
+  "(" (15) 21 23 31
+  ")" (16) 21 23 31
+  "." (17) 22 23
+  "," (18) 26 34
+  "=" (19) 28 29
+  "{" (20) 38
+  "}" (21) 38
 
 --------- State ---------
 
@@ -452,8 +452,8 @@ state 29
   30) Def : CAN IDENTIFIER _ Block
   31) Def : CAN IDENTIFIER _ "(" ParamList ")" Block
 
-  INDENT        shift, and go to state 41
   "("           shift, and go to state 40
+  "{"           shift, and go to state 41
 
   Block         go to state 39
 
@@ -461,7 +461,7 @@ state 30
 
   35) Class : A CONSTANT _ Block
 
-  INDENT        shift, and go to state 41
+  "{"           shift, and go to state 41
 
   Block         go to state 42
 
@@ -472,8 +472,8 @@ state 31
   36) If : IF Expression _ Block
   37) If : IF Expression _ Block NEWLINE ELSE Block
 
-  INDENT        shift, and go to state 41
   "."           shift, and go to state 25
+  "{"           shift, and go to state 41
 
   Block         go to state 43
 
@@ -561,7 +561,7 @@ state 40
 
 state 41
 
-  38) Block : INDENT _ Expressions DEDENT
+  38) Block : "{" _ Expressions "}"
 
   A             shift, and go to state 19
   CAN           shift, and go to state 18
@@ -678,11 +678,11 @@ state 49
 
    4) Expressions : Expressions _ Terminator Expression
    5) Expressions : Expressions _ Terminator
-  38) Block : INDENT Expressions _ DEDENT
+  38) Block : "{" Expressions _ "}"
 
   NEWLINE       shift, and go to state 23
-  DEDENT        shift, and go to state 55
   ";"           shift, and go to state 24
+  "}"           shift, and go to state 55
 
   Terminator    go to state 22
 
@@ -716,7 +716,7 @@ state 53
 
   31) Def : CAN IDENTIFIER "(" ParamList ")" _ Block
 
-  INDENT        shift, and go to state 41
+  "{"           shift, and go to state 41
 
   Block         go to state 58
 
@@ -729,7 +729,7 @@ state 54
 
 state 55
 
-  38) Block : INDENT Expressions DEDENT _
+  38) Block : "{" Expressions "}" _
 
   $default      reduce using rule 38 (Block)
 
@@ -738,7 +738,7 @@ state 56
 
   37) If : IF Expression Block NEWLINE ELSE _ Block
 
-  INDENT        shift, and go to state 41
+  "{"           shift, and go to state 41
 
   Block         go to state 60
 

@@ -73,6 +73,7 @@ racc_reduce_n = 39
 racc_shift_n = 61
 
 racc_action_table = [
+<<<<<<< HEAD
      5,     8,    10,    42,    37,    13,    15,    17,    19,     1,
      3,     6,     5,     8,    10,    30,    30,    13,    15,    17,
     19,     1,     3,     6,     5,     8,    10,    35,    30,    13,
@@ -141,6 +142,7 @@ racc_goto_default = [
     20,     2,   nil,   nil,   nil ]
 
 racc_token_table = {
+<<<<<<< HEAD
  false => 0,
  Object.new => 1,
  :A => 2,
@@ -447,6 +449,173 @@ module_eval <<'.,.,', 'grammar.y', 96
   def _reduce_38( val, _values, result )
  result = val[1]
    result
+=======
+module_eval(<<'.,.,', 'grammar.y', 42)
+  def _reduce_15(val, _values, result)
+     result = LiteralNode.new(val[0])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 43)
+  def _reduce_16(val, _values, result)
+     result = LiteralNode.new(val[0])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 44)
+  def _reduce_17(val, _values, result)
+     result = LiteralNode.new(true)
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 45)
+  def _reduce_18(val, _values, result)
+     result = LiteralNode.new(false)
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 46)
+  def _reduce_19(val, _values, result)
+     result = LiteralNode.new(nil)
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 50)
+  def _reduce_20(val, _values, result)
+     result = CallNode.new(nil, val[0])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 51)
+  def _reduce_21(val, _values, result)
+     result = CallNode.new(nil, val[0], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 52)
+  def _reduce_22(val, _values, result)
+     result = CallNode.new(val[0], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 54)
+  def _reduce_23(val, _values, result)
+     result = CallNode.new(val[0], val[2], val[4])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 58)
+  def _reduce_24(val, _values, result)
+     result = []
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 59)
+  def _reduce_25(val, _values, result)
+     result = val
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 60)
+  def _reduce_26(val, _values, result)
+     result = val[0] << val[2]
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 64)
+  def _reduce_27(val, _values, result)
+     result = GetConstantNode.new(val[0])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 68)
+  def _reduce_28(val, _values, result)
+     result = SetLocalNode.new(val[0], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 69)
+  def _reduce_29(val, _values, result)
+     result = SetConstantNode.new(val[0], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 73)
+  def _reduce_30(val, _values, result)
+     result = DefNode.new(val[1], [], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 75)
+  def _reduce_31(val, _values, result)
+     result = DefNode.new(val[1], val[3], val[5])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 79)
+  def _reduce_32(val, _values, result)
+     result = []
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 80)
+  def _reduce_33(val, _values, result)
+     result = val
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 81)
+  def _reduce_34(val, _values, result)
+     result = val[0] << val[2]
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 85)
+  def _reduce_35(val, _values, result)
+     result = val[0] << val[2]
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 89)
+  def _reduce_36(val, _values, result)
+     result = IfNode.new(val[1], val[2])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 91)
+  def _reduce_37(val, _values, result)
+     result = IfNode.new(val[1], val[2], val[5])
+    result
+  end
+.,.,
+
+module_eval(<<'.,.,', 'grammar.y', 95)
+  def _reduce_38(val, _values, result)
+     replace = val[1]
+    result
+>>>>>>> 47aead2a05c641f00321c72b975c1756fedfc406
   end
 .,.,
 

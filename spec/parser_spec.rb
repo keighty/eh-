@@ -4,7 +4,11 @@ require 'spec_helper'
 
 describe "Parser" do
   it 'should parse a class definition' do
-    parser = Parser.new.parse(NEXT_SIMPLE)
+    @tokens = Lexer.new.tokenize(BASIC_CLASS)
+    p @tokens
+
+    p Parser.new.parse(BASIC_CLASS)
+    # parser = Parser.new.parse(NEXT_SIMPLE)
     x = parser.instance_variable_get(:@nodes)
 
     expect(x.first.class).to be Nodes
