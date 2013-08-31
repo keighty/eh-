@@ -64,9 +64,4 @@ describe "Lexer" do
   it "should parse a basic class" do
     expect(@lex.tokenize(BASIC_CLASS)).not_to include [:IDENTIFIER, "eh"]
   end
-
-  it "should check for missing :" do
-    pending "implemented eh?"
-    expect { @lex.tokenize(BAD_INDENT) }.to raise_error
-  end
 end
