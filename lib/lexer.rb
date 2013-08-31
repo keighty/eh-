@@ -1,5 +1,5 @@
 class Lexer
-  KEYWORDS = ['a', 'can', 'if', 'else', 'while', 'true', 'false', 'nil']
+  KEYWORDS = ['a', 'an', 'can', 'if', 'else', 'while', 'true', 'false', 'nil', 'hockey']
 
   def tokenize(code)
     code.chomp!
@@ -11,7 +11,7 @@ class Lexer
       chunk = code[i..-1]
 
       # checks keywords
-      if identifier = chunk[/\A(eh\?)/, 1]
+      if identifier = chunk[/\A(eh\?*)/, 1]
         tokens << ['}', '}']
         i += identifier.size
 

@@ -15,6 +15,11 @@ describe "Lexer" do
 
   it 'tokenizes a class definition' do
     @lex.tokenize("a Car").should eq [[:A, 'a'], [:CONSTANT, 'Car']]
+    @lex.tokenize("an Automobile").should eq [[:AN, 'an'], [:CONSTANT, 'Automobile']]
+  end
+
+  it 'tokenizes a hockey declaration' do
+    @lex.tokenize("hockey").should eq [[:HOCKEY, 'hockey']]
   end
 
   it 'tokenizes a test single operator' do
