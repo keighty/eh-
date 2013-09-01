@@ -1,3 +1,9 @@
+PARSIT = <<-EOS
+can say_aboot:
+  puts
+eh?
+EOS
+
 SIMPLE = <<-EOS
 x < y
 EOS
