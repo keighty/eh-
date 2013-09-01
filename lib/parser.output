@@ -1,0 +1,210 @@
+
+rule 6 (Terminator) never reduced
+rule 7 (Terminator) never reduced
+useless nonterminal Terminator
+
+-------- Grammar --------
+
+rule 1 Root: Expressions
+rule 2 Expressions: Expression
+rule 3 Expression: Class
+rule 4 Expression: Constant
+rule 5 Expression: Block
+rule 6 Terminator: NEWLINE
+rule 7 Terminator: ";"
+rule 8 Constant: CONSTANT
+rule 9 Class: A CONSTANT Block
+rule 10 Class: AN CONSTANT Block
+rule 11 Block: "{" Expressions "}"
+
+------- Symbols -------
+
+**Nonterminals, with rules where they appear
+
+  $start (10)
+    on right: 
+    on left : 
+  Root (11)
+    on right: 
+    on left : 1
+  Expressions (12)
+    on right: 1 11
+    on left : 2
+  Expression (13)
+    on right: 2
+    on left : 3 4 5
+  Class (14)
+    on right: 3
+    on left : 9 10
+  Constant (15)
+    on right: 4
+    on left : 8
+  Block (16)
+    on right: 5 9 10
+    on left : 11
+  Terminator (17)
+    on right: 
+    on left : 6 7
+
+**Terminals, with rules where they appear
+
+  $end (0) 
+  error (1) 
+  CAN (2) 
+  A (3) 9
+  AN (4) 10
+  CONSTANT (5) 8 9 10
+  NEWLINE (6) 6
+  ";" (7) 7
+  "{" (8) 11
+  "}" (9) 11
+
+--------- State ---------
+
+state 0
+
+
+  A             shift, and go to state 8
+  AN            shift, and go to state 9
+  CONSTANT      shift, and go to state 7
+  "{"           shift, and go to state 10
+
+  Root          go to state 1
+  Expressions   go to state 2
+  Expression    go to state 3
+  Class         go to state 4
+  Constant      go to state 5
+  Block         go to state 6
+
+state 1
+
+
+  $end          shift, and go to state 11
+
+
+state 2
+
+   1) Root : Expressions _
+
+  $default      reduce using rule 1 (Root)
+
+
+state 3
+
+   2) Expressions : Expression _
+
+  $default      reduce using rule 2 (Expressions)
+
+
+state 4
+
+   3) Expression : Class _
+
+  $default      reduce using rule 3 (Expression)
+
+
+state 5
+
+   4) Expression : Constant _
+
+  $default      reduce using rule 4 (Expression)
+
+
+state 6
+
+   5) Expression : Block _
+
+  $default      reduce using rule 5 (Expression)
+
+
+state 7
+
+   8) Constant : CONSTANT _
+
+  $default      reduce using rule 8 (Constant)
+
+
+state 8
+
+   9) Class : A _ CONSTANT Block
+
+  CONSTANT      shift, and go to state 12
+
+
+state 9
+
+  10) Class : AN _ CONSTANT Block
+
+  CONSTANT      shift, and go to state 13
+
+
+state 10
+
+  11) Block : "{" _ Expressions "}"
+
+  A             shift, and go to state 8
+  AN            shift, and go to state 9
+  CONSTANT      shift, and go to state 7
+  "{"           shift, and go to state 10
+
+  Expression    go to state 3
+  Class         go to state 4
+  Constant      go to state 5
+  Block         go to state 6
+  Expressions   go to state 14
+
+state 11
+
+
+  $end          shift, and go to state 15
+
+
+state 12
+
+   9) Class : A CONSTANT _ Block
+
+  "{"           shift, and go to state 10
+
+  Block         go to state 16
+
+state 13
+
+  10) Class : AN CONSTANT _ Block
+
+  "{"           shift, and go to state 10
+
+  Block         go to state 17
+
+state 14
+
+  11) Block : "{" Expressions _ "}"
+
+  "}"           shift, and go to state 18
+
+
+state 15
+
+
+  $default      accept
+
+
+state 16
+
+   9) Class : A CONSTANT Block _
+
+  $default      reduce using rule 9 (Class)
+
+
+state 17
+
+  10) Class : AN CONSTANT Block _
+
+  $default      reduce using rule 10 (Class)
+
+
+state 18
+
+  11) Block : "{" Expressions "}" _
+
+  $default      reduce using rule 11 (Block)
+
