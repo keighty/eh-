@@ -1,37 +1,25 @@
 class Parser
 
-token A
+# Declare tokens produced by the lexer
 token CAN
-
-token IF ELSE
-token NEWLINE
-token NUMBER
-token STRING
-token TRUE FALSE NIL
-token IDENTIFIER
+token A
+token AN
 token CONSTANT
+token NEWLINE
 
 rule
-
   Root:
-    /* nothing */         { result = Nodes.new([]) }
-  | Expressions           { result = val[0] }
+    Expressions { result = val[0] }
   ;
 
   Expressions:
-    Expression                        { result = Nodes.new(val) }
-  | Expressions Terminator Expression { result = val[0] << val[2] }
-  | Expressions Terminator            { result = Nodes.new([val[0]]) }
+    Expression { result = Nodes.new(val) }
   ;
 
   Expression:
-    Literal
-  | Call
+    Class
   | Constant
-  | Assign
-  | Def
-  | Class
-  | If
+  | Block
   ;
 
   Terminator:
@@ -39,61 +27,17 @@ rule
   | ";"
   ;
 
-  Literal:
-    NUMBER    { result = LiteralNode.new(val[0]) }
-  | STRING    { result = LiteralNode.new(val[0]) }
-  | TRUE      { result = LiteralNode.new(true) }
-  | FALSE     { result = LiteralNode.new(false) }
-  | NIL       { result = LiteralNode.new(nil) }
-  ;
-
-  Call:
-    IDENTIFIER                  { result = CallNode.new(nil, val[0]) }
-  | IDENTIFIER "(" ArgList ")"  { result = CallNode.new(nil, val[0], val[2]) }
-  | Expression "." IDENTIFIER   { result = CallNode.new(val[0], val[2]) }
-  | Expression "."
-      IDENTIFIER "(" ArgList ")" { result = CallNode.new(val[0], val[2], val[4])}
-  ;
-
-  ArgList:
-    /* nothing */             { result = [] }
-  | Expression                { result = val }
-  | ArgList "," Expression    { result = val[0] << val[2] }
-  ;
-
   Constant:
-    CONSTANT        { result = GetConstantNode.new(val[0]) }
-  ;
-
-  Assign:
-    IDENTIFIER "=" Expression     { result = SetLocalNode.new(val[0], val[2]) }
-  | CONSTANT "=" Expression       { result = SetConstantNode.new(val[0], val[2]) }
-  ;
-
-  Def:
-    CAN IDENTIFIER Block        { result = DefNode.new(val[1], [], val[2]) }
-  | CAN IDENTIFIER
-      "(" ParamList ")" Block   { result = DefNode.new(val[1], val[3], val[5]) }
-  ;
-
-  ParamList:
-    /* nothing */             { result = [] }
-  | IDENTIFIER                { result = val }
-  | ParamList "," IDENTIFIER  { result = val[0] << val[2] }
+    CONSTANT { result = ConstantNode.new(val[0]) }
   ;
 
   Class:
-    A CONSTANT Block   { result = ClassNode.new(val[1], val[2]) }
-  ;
-
-  If:
-    IF Expression Block       { result = IfNode.new(val[1], val[2]) }
-  | IF Expression Block NEWLINE
-    ELSE Block                { result = IfNode.new(val[1], val[2], val[5]) }
+    A CONSTANT Block { result = ClassNode.new(val[1], val[2]) }
+    | AN CONSTANT Block { result = ClassNode.new(val[1], val[2]) }
   ;
 
   Block:
-    "{" Expressions "}"   { replace = val[1] }
+    "{" Expressions "}"           { replace = val[1] }
   ;
 end
 
