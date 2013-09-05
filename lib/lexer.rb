@@ -11,13 +11,21 @@ class Lexer
       chunk = code[i..-1]
 
       # checks keywords
-      if identifier = chunk[/\A(eh\?*)/, 1]
-        tokens << ['}', '}']
-        i += identifier.size
+      # if identifier = chunk[/\A(eh\?*)/, 1]
+      #   tokens << ['}', '}']
+      #   i += identifier.size
 
-      elsif chunk.match(/\A:/)
-        tokens << ['{', '{']
-        i += 1
+      # elsif chunk.match(/\A:/)
+      #   tokens << ['{', '{']
+      #   i += 1
+
+      if open = chunk[/\A(:\n?)/, 1]
+        tokens << ["{", "{"]
+        i += open.size
+
+      elsif close = chunk[/\A(eh\?\n?)/, 1]
+        tokens << ["}", "}"]
+        i += close.size
 
       elsif identifier = chunk[/\A([a-z]\w*)/, 1]
         if KEYWORDS.include?(identifier)
