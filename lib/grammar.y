@@ -101,8 +101,8 @@ rule
 end
 
 ---- header
-  require "lexer"
-  require "nodes"
+  require_relative "./lexer"
+  require_relative "./nodes"
 
 ---- inner
   def parse(code, show_tokens=false)
