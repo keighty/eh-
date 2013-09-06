@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# The Canadian language!
+#
+# usage:
+#   ./canada example.eh # to eval a file
+#   ./canada             # to start the REPL
+#
+# on Windows run with: ruby canada [options]
+require_relative "./bin/canada"

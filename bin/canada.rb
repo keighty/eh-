@@ -6,9 +6,9 @@
 #   ./canada             # to start the REPL
 #
 # on Windows run with: ruby canada [options]
-require_relative "./parser"
-require_relative "./runtime"
-require_relative "./lexer"
+require_relative "../lib/parser"
+require_relative "../lib/runtime"
+require_relative "../lib/lexer"
 require "readline"
 
 def eval(code)
