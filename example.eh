@@ -6,6 +6,6 @@ eh?
 
 me = Canadian.new
 if me:
-  print("me.huzzah: ")
-  print(me.huzzah)
+  say("me.huzzah: ")
+  say(me.huzzah)
 eh?

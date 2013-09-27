@@ -5,19 +5,9 @@ class Lexer
     code.chomp!
     i = 0
     tokens = []
-    current_indent = 0
 
     while i < code.size
       chunk = code[i..-1]
-
-      # checks keywords
-      # if identifier = chunk[/\A(eh\?*)/, 1]
-      #   tokens << ['}', '}']
-      #   i += identifier.size
-
-      # elsif chunk.match(/\A:/)
-      #   tokens << ['{', '{']
-      #   i += 1
 
       if open = chunk[/\A(:\n?)/, 1]
         tokens << ["{", "{"]
@@ -26,6 +16,10 @@ class Lexer
       elsif close = chunk[/\A(eh\?\n?)/, 1]
         tokens << ["}", "}"]
         i += close.size
+
+      elsif sayer = chunk[/\A(say)/, 1]
+        tokens << [:IDENTIFIER, "print"]
+        i += sayer.size
 
       elsif identifier = chunk[/\A([a-z]\w*)/, 1]
         if KEYWORDS.include?(identifier)
@@ -42,6 +36,10 @@ class Lexer
 
       # check for strings
       elsif string = chunk[/\A"(.*?)"/, 1]
+        tokens << [:STRING, string]
+        i += string.size + 2
+
+      elsif string = chunk[/\A'(.*?)'/, 1]
         tokens << [:STRING, string]
         i += string.size + 2
 

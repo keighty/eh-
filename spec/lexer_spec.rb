@@ -13,9 +13,13 @@ describe "Lexer" do
     @lex.tokenize("True").should eq [[:CONSTANT, "True"]]
   end
 
+  it 'tokenizes a say command' do
+    @lex.tokenize("say 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
+  end
+
   it 'tokenizes a class definition' do
-    @lex.tokenize("a Car").should eq [[:A, 'a'], [:CONSTANT, 'Car']]
-    @lex.tokenize("an Automobile").should eq [[:AN, 'an'], [:CONSTANT, 'Automobile']]
+    @lex.tokenize("a Car\n").should eq [[:A, 'a'], [:CONSTANT, 'Car']]
+    @lex.tokenize("an Automobile\n").should eq [[:AN, 'an'], [:CONSTANT, 'Automobile']]
   end
 
   it 'tokenizes a hockey declaration' do

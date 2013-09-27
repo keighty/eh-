@@ -11,7 +11,6 @@ token STRING
 token TRUE FALSE NIL
 token IDENTIFIER
 token CONSTANT
-token INDENT DEDENT
 
 rule
   Root:
