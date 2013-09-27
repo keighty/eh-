@@ -17,7 +17,7 @@ class Lexer
         tokens << ["}", "}"]
         i += close.size
 
-      elsif sayer = chunk[/\A(say)/, 1]
+      elsif sayer = chunk[/\A(say|puts)/, 1]
         tokens << [:IDENTIFIER, "print"]
         i += sayer.size
 
