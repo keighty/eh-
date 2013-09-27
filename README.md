@@ -30,3 +30,10 @@ $ canada example.eh
 
 ####Credits
 I am following the awesome book - [Create your own freaking awesome programming language by](http://createyourproglang.com/) by Marc-André Cournoyer
+
+###Contributing
+1. Fork it
+1. Create your feature branch (`git checkout -b my-new-feature`)
+1. Commit your changes (`git commit -am 'Add some feature'`)
+1. Push to the branch (`git push origin my-new-feature`)
+1. Create new Pull Request
