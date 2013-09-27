@@ -1,31 +1,5 @@
-#!/usr/bin/env ruby
-# The Canadian language!
-#
-# usage:
-#   ./canada example.eh # to eval a file
-#   ./canada             # to start the REPL
-#
-# on Windows run with: ruby canada [options]
-require_relative "../lib/parser"
-require_relative "../lib/runtime"
-require_relative "../lib/lexer"
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require "parser"
+require "runtime"
+require "lexer"
 require "readline"
-
-def eval(code)
-  Parser.new.parse(code).eval(Runtime).ruby_value
-end
-
-# If a file is given we eval it.
-if file = ARGV.first
-  eval File.read(file)
-
-# Start the REPL, read-eval-print-loop, or interactive interpreter
-else
-  puts "Canadian REPL, CTRL+C to quit"
-  loop do
-    line = Readline.readline(">> ")
-    Readline::HISTORY.push(line)
-    puts "=> #{eval(line).inspect}"
-  end
-
-end

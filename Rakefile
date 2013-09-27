@@ -1,4 +1,5 @@
-require './can'
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'bin'))
+require 'canada'
 
 desc 'Run lexer specs'
 task :lex do |t|
