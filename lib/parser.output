@@ -1,6 +1,6 @@
-state 39 contains 1 shift/reduce conflicts
-state 40 contains 1 shift/reduce conflicts
-state 46 contains 1 shift/reduce conflicts
+state 42 contains 1 shift/reduce conflicts
+state 43 contains 1 shift/reduce conflicts
+state 49 contains 1 shift/reduce conflicts
 
 
 -------- Grammar --------
@@ -17,128 +17,133 @@ rule 9 Expression: Assign
 rule 10 Expression: Def
 rule 11 Expression: Class
 rule 12 Expression: If
-rule 13 Terminator: NEWLINE
-rule 14 Terminator: ";"
-rule 15 Literal: NUMBER
-rule 16 Literal: STRING
-rule 17 Literal: TRUE
-rule 18 Literal: FALSE
-rule 19 Literal: NIL
-rule 20 Call: IDENTIFIER
-rule 21 Call: IDENTIFIER "(" ArgList ")"
-rule 22 Call: Expression "." IDENTIFIER
-rule 23 Call: Expression "." IDENTIFIER "(" ArgList ")"
-rule 24 ArgList: 
-rule 25 ArgList: Expression
-rule 26 ArgList: ArgList "," Expression
-rule 27 Constant: CONSTANT
-rule 28 Assign: IDENTIFIER "=" Expression
-rule 29 Assign: CONSTANT "=" Expression
-rule 30 Def: CAN IDENTIFIER Block
-rule 31 Def: CAN IDENTIFIER "(" ParamList ")" Block
-rule 32 ParamList: 
-rule 33 ParamList: IDENTIFIER
-rule 34 ParamList: ParamList "," IDENTIFIER
-rule 35 Class: A CONSTANT Block
-rule 36 Class: AN CONSTANT Block
-rule 37 If: IF Expression Block
-rule 38 If: IF Expression Block NEWLINE ELSE Block
-rule 39 Block: "{" Expressions "}"
+rule 13 Expression: While
+rule 14 Terminator: NEWLINE
+rule 15 Terminator: ";"
+rule 16 Literal: NUMBER
+rule 17 Literal: STRING
+rule 18 Literal: TRUE
+rule 19 Literal: FALSE
+rule 20 Literal: NIL
+rule 21 Call: IDENTIFIER
+rule 22 Call: IDENTIFIER "(" ArgList ")"
+rule 23 Call: Expression "." IDENTIFIER
+rule 24 Call: Expression "." IDENTIFIER "(" ArgList ")"
+rule 25 ArgList: 
+rule 26 ArgList: Expression
+rule 27 ArgList: ArgList "," Expression
+rule 28 Constant: CONSTANT
+rule 29 Assign: IDENTIFIER "=" Expression
+rule 30 Assign: CONSTANT "=" Expression
+rule 31 Def: CAN IDENTIFIER Block
+rule 32 Def: CAN IDENTIFIER "(" ParamList ")" Block
+rule 33 ParamList: 
+rule 34 ParamList: IDENTIFIER
+rule 35 ParamList: ParamList "," IDENTIFIER
+rule 36 Class: A CONSTANT Block
+rule 37 Class: AN CONSTANT Block
+rule 38 If: IF Expression Block
+rule 39 If: IF Expression Block NEWLINE ELSE Block
+rule 40 While: WHILE Expression Block
+rule 41 Block: "{" Expressions "}"
 
 ------- Symbols -------
 
 **Nonterminals, with rules where they appear
 
-  $start (25)
+  $start (24)
     on right: 
     on left : 
-  Root (26)
+  Root (25)
     on right: 
     on left : 1 2
-  Expressions (27)
-    on right: 2 4 5 39
+  Expressions (26)
+    on right: 2 4 5 41
     on left : 3 4 5
-  Expression (28)
-    on right: 3 4 22 23 25 26 28 29 37 38
-    on left : 6 7 8 9 10 11 12
-  Terminator (29)
+  Expression (27)
+    on right: 3 4 23 24 26 27 29 30 38 39 40
+    on left : 6 7 8 9 10 11 12 13
+  Terminator (28)
     on right: 4 5
-    on left : 13 14
-  Literal (30)
+    on left : 14 15
+  Literal (29)
     on right: 6
-    on left : 15 16 17 18 19
-  Call (31)
+    on left : 16 17 18 19 20
+  Call (30)
     on right: 7
-    on left : 20 21 22 23
-  Constant (32)
+    on left : 21 22 23 24
+  Constant (31)
     on right: 8
-    on left : 27
-  Assign (33)
+    on left : 28
+  Assign (32)
     on right: 9
-    on left : 28 29
-  Def (34)
+    on left : 29 30
+  Def (33)
     on right: 10
-    on left : 30 31
-  Class (35)
+    on left : 31 32
+  Class (34)
     on right: 11
-    on left : 35 36
-  If (36)
+    on left : 36 37
+  If (35)
     on right: 12
-    on left : 37 38
+    on left : 38 39
+  While (36)
+    on right: 13
+    on left : 40
   ArgList (37)
-    on right: 21 23 26
-    on left : 24 25 26
+    on right: 22 24 27
+    on left : 25 26 27
   Block (38)
-    on right: 30 31 35 36 37 38
-    on left : 39
+    on right: 31 32 36 37 38 39 40
+    on left : 41
   ParamList (39)
-    on right: 31 34
-    on left : 32 33 34
+    on right: 32 35
+    on left : 33 34 35
 
 **Terminals, with rules where they appear
 
   $end (0) 
   error (1) 
-  IF (2) 37 38
-  ELSE (3) 38
-  CAN (4) 30 31
-  A (5) 35
-  AN (6) 36
-  NEWLINE (7) 13 38
-  NUMBER (8) 15
-  STRING (9) 16
-  TRUE (10) 17
-  FALSE (11) 18
-  NIL (12) 19
-  IDENTIFIER (13) 20 21 22 23 28 30 31 33 34
-  CONSTANT (14) 27 29 35 36
-  INDENT (15) 
-  DEDENT (16) 
-  ";" (17) 14
-  "(" (18) 21 23 31
-  ")" (19) 21 23 31
-  "." (20) 22 23
-  "," (21) 26 34
-  "=" (22) 28 29
-  "{" (23) 39
-  "}" (24) 39
+  IF (2) 38 39
+  ELSE (3) 39
+  WHILE (4) 40
+  CAN (5) 31 32
+  A (6) 36
+  AN (7) 37
+  NEWLINE (8) 14 39
+  NUMBER (9) 16
+  STRING (10) 17
+  TRUE (11) 18
+  FALSE (12) 19
+  NIL (13) 20
+  IDENTIFIER (14) 21 22 23 24 29 31 32 34 35
+  CONSTANT (15) 28 30 36 37
+  ";" (16) 15
+  "(" (17) 22 24 32
+  ")" (18) 22 24 32
+  "." (19) 23 24
+  "," (20) 27 35
+  "=" (21) 29 30
+  "{" (22) 41
+  "}" (23) 41
 
 --------- State ---------
 
 state 0
 
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
   $default      reduce using rule 1 (Root)
 
   Root          go to state 1
@@ -151,11 +156,12 @@ state 0
   Def           go to state 8
   Class         go to state 9
   If            go to state 10
+  While         go to state 11
 
 state 1
 
 
-  $end          shift, and go to state 22
+  $end          shift, and go to state 24
 
 
 state 2
@@ -164,19 +170,19 @@ state 2
    4) Expressions : Expressions _ Terminator Expression
    5) Expressions : Expressions _ Terminator
 
-  NEWLINE       shift, and go to state 24
-  ";"           shift, and go to state 25
+  NEWLINE       shift, and go to state 26
+  ";"           shift, and go to state 27
   $default      reduce using rule 2 (Root)
 
-  Terminator    go to state 23
+  Terminator    go to state 25
 
 state 3
 
    3) Expressions : Expression _
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
 
-  "."           shift, and go to state 26
+  "."           shift, and go to state 28
   $default      reduce using rule 3 (Expressions)
 
 
@@ -231,132 +237,106 @@ state 10
 
 state 11
 
-  15) Literal : NUMBER _
+  13) Expression : While _
 
-  $default      reduce using rule 15 (Literal)
+  $default      reduce using rule 13 (Expression)
 
 
 state 12
 
-  16) Literal : STRING _
+  16) Literal : NUMBER _
 
   $default      reduce using rule 16 (Literal)
 
 
 state 13
 
-  17) Literal : TRUE _
+  17) Literal : STRING _
 
   $default      reduce using rule 17 (Literal)
 
 
 state 14
 
-  18) Literal : FALSE _
+  18) Literal : TRUE _
 
   $default      reduce using rule 18 (Literal)
 
 
 state 15
 
-  19) Literal : NIL _
+  19) Literal : FALSE _
 
   $default      reduce using rule 19 (Literal)
 
 
 state 16
 
-  20) Call : IDENTIFIER _
-  21) Call : IDENTIFIER _ "(" ArgList ")"
-  28) Assign : IDENTIFIER _ "=" Expression
+  20) Literal : NIL _
 
-  "("           shift, and go to state 27
-  "="           shift, and go to state 28
-  $default      reduce using rule 20 (Call)
+  $default      reduce using rule 20 (Literal)
 
 
 state 17
 
-  27) Constant : CONSTANT _
-  29) Assign : CONSTANT _ "=" Expression
+  21) Call : IDENTIFIER _
+  22) Call : IDENTIFIER _ "(" ArgList ")"
+  29) Assign : IDENTIFIER _ "=" Expression
 
-  "="           shift, and go to state 29
-  $default      reduce using rule 27 (Constant)
+  "("           shift, and go to state 29
+  "="           shift, and go to state 30
+  $default      reduce using rule 21 (Call)
 
 
 state 18
 
-  30) Def : CAN _ IDENTIFIER Block
-  31) Def : CAN _ IDENTIFIER "(" ParamList ")" Block
+  28) Constant : CONSTANT _
+  30) Assign : CONSTANT _ "=" Expression
 
-  IDENTIFIER    shift, and go to state 30
+  "="           shift, and go to state 31
+  $default      reduce using rule 28 (Constant)
 
 
 state 19
 
-  35) Class : A _ CONSTANT Block
+  31) Def : CAN _ IDENTIFIER Block
+  32) Def : CAN _ IDENTIFIER "(" ParamList ")" Block
 
-  CONSTANT      shift, and go to state 31
+  IDENTIFIER    shift, and go to state 32
 
 
 state 20
 
-  36) Class : AN _ CONSTANT Block
+  36) Class : A _ CONSTANT Block
 
-  CONSTANT      shift, and go to state 32
+  CONSTANT      shift, and go to state 33
 
 
 state 21
 
-  37) If : IF _ Expression Block
-  38) If : IF _ Expression Block NEWLINE ELSE Block
+  37) Class : AN _ CONSTANT Block
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
+  CONSTANT      shift, and go to state 34
 
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
-  Expression    go to state 33
 
 state 22
 
+  38) If : IF _ Expression Block
+  39) If : IF _ Expression Block NEWLINE ELSE Block
 
-  $end          shift, and go to state 34
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
 
-
-state 23
-
-   4) Expressions : Expressions Terminator _ Expression
-   5) Expressions : Expressions Terminator _
-
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
-  $default      reduce using rule 5 (Expressions)
-
-  Expression    go to state 35
   Literal       go to state 4
   Call          go to state 5
   Constant      go to state 6
@@ -364,96 +344,110 @@ state 23
   Def           go to state 8
   Class         go to state 9
   If            go to state 10
+  While         go to state 11
+  Expression    go to state 35
+
+state 23
+
+  40) While : WHILE _ Expression Block
+
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+  Expression    go to state 36
 
 state 24
 
-  13) Terminator : NEWLINE _
 
-  $default      reduce using rule 13 (Terminator)
+  $end          shift, and go to state 37
 
 
 state 25
 
-  14) Terminator : ";" _
+   4) Expressions : Expressions Terminator _ Expression
+   5) Expressions : Expressions Terminator _
+
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+  $default      reduce using rule 5 (Expressions)
+
+  Expression    go to state 38
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+
+state 26
+
+  14) Terminator : NEWLINE _
 
   $default      reduce using rule 14 (Terminator)
 
 
-state 26
-
-  22) Call : Expression "." _ IDENTIFIER
-  23) Call : Expression "." _ IDENTIFIER "(" ArgList ")"
-
-  IDENTIFIER    shift, and go to state 36
-
-
 state 27
 
-  21) Call : IDENTIFIER "(" _ ArgList ")"
+  15) Terminator : ";" _
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
-  $default      reduce using rule 24 (ArgList)
+  $default      reduce using rule 15 (Terminator)
 
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
-  ArgList       go to state 37
-  Expression    go to state 38
 
 state 28
 
-  28) Assign : IDENTIFIER "=" _ Expression
+  23) Call : Expression "." _ IDENTIFIER
+  24) Call : Expression "." _ IDENTIFIER "(" ArgList ")"
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
+  IDENTIFIER    shift, and go to state 39
 
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
-  Expression    go to state 39
 
 state 29
 
-  29) Assign : CONSTANT "=" _ Expression
+  22) Call : IDENTIFIER "(" _ ArgList ")"
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+  $default      reduce using rule 25 (ArgList)
 
   Literal       go to state 4
   Call          go to state 5
@@ -462,345 +456,425 @@ state 29
   Def           go to state 8
   Class         go to state 9
   If            go to state 10
-  Expression    go to state 40
+  While         go to state 11
+  ArgList       go to state 40
+  Expression    go to state 41
 
 state 30
 
-  30) Def : CAN IDENTIFIER _ Block
-  31) Def : CAN IDENTIFIER _ "(" ParamList ")" Block
+  29) Assign : IDENTIFIER "=" _ Expression
 
-  "("           shift, and go to state 42
-  "{"           shift, and go to state 43
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
 
-  Block         go to state 41
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+  Expression    go to state 42
 
 state 31
 
-  35) Class : A CONSTANT _ Block
+  30) Assign : CONSTANT "=" _ Expression
 
-  "{"           shift, and go to state 43
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
 
-  Block         go to state 44
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+  Expression    go to state 43
 
 state 32
 
-  36) Class : AN CONSTANT _ Block
+  31) Def : CAN IDENTIFIER _ Block
+  32) Def : CAN IDENTIFIER _ "(" ParamList ")" Block
 
-  "{"           shift, and go to state 43
+  "("           shift, and go to state 45
+  "{"           shift, and go to state 46
 
-  Block         go to state 45
+  Block         go to state 44
 
 state 33
 
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-  37) If : IF Expression _ Block
-  38) If : IF Expression _ Block NEWLINE ELSE Block
+  36) Class : A CONSTANT _ Block
 
-  "."           shift, and go to state 26
-  "{"           shift, and go to state 43
+  "{"           shift, and go to state 46
 
-  Block         go to state 46
+  Block         go to state 47
 
 state 34
+
+  37) Class : AN CONSTANT _ Block
+
+  "{"           shift, and go to state 46
+
+  Block         go to state 48
+
+state 35
+
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  38) If : IF Expression _ Block
+  39) If : IF Expression _ Block NEWLINE ELSE Block
+
+  "."           shift, and go to state 28
+  "{"           shift, and go to state 46
+
+  Block         go to state 49
+
+state 36
+
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  40) While : WHILE Expression _ Block
+
+  "."           shift, and go to state 28
+  "{"           shift, and go to state 46
+
+  Block         go to state 50
+
+state 37
 
 
   $default      accept
 
 
-state 35
-
-   4) Expressions : Expressions Terminator Expression _
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-
-  "."           shift, and go to state 26
-  $default      reduce using rule 4 (Expressions)
-
-
-state 36
-
-  22) Call : Expression "." IDENTIFIER _
-  23) Call : Expression "." IDENTIFIER _ "(" ArgList ")"
-
-  "("           shift, and go to state 47
-  $default      reduce using rule 22 (Call)
-
-
-state 37
-
-  21) Call : IDENTIFIER "(" ArgList _ ")"
-  26) ArgList : ArgList _ "," Expression
-
-  ")"           shift, and go to state 48
-  ","           shift, and go to state 49
-
-
 state 38
 
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-  25) ArgList : Expression _
+   4) Expressions : Expressions Terminator Expression _
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
 
-  "."           shift, and go to state 26
-  $default      reduce using rule 25 (ArgList)
+  "."           shift, and go to state 28
+  $default      reduce using rule 4 (Expressions)
 
 
 state 39
 
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-  28) Assign : IDENTIFIER "=" Expression _
+  23) Call : Expression "." IDENTIFIER _
+  24) Call : Expression "." IDENTIFIER _ "(" ArgList ")"
 
-  "."           shift, and go to state 26
-  "."           [reduce using rule 28 (Assign)]
-  $default      reduce using rule 28 (Assign)
+  "("           shift, and go to state 51
+  $default      reduce using rule 23 (Call)
 
 
 state 40
 
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-  29) Assign : CONSTANT "=" Expression _
+  22) Call : IDENTIFIER "(" ArgList _ ")"
+  27) ArgList : ArgList _ "," Expression
 
-  "."           shift, and go to state 26
-  "."           [reduce using rule 29 (Assign)]
-  $default      reduce using rule 29 (Assign)
+  ")"           shift, and go to state 52
+  ","           shift, and go to state 53
 
 
 state 41
 
-  30) Def : CAN IDENTIFIER Block _
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  26) ArgList : Expression _
 
-  $default      reduce using rule 30 (Def)
+  "."           shift, and go to state 28
+  $default      reduce using rule 26 (ArgList)
 
 
 state 42
 
-  31) Def : CAN IDENTIFIER "(" _ ParamList ")" Block
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  29) Assign : IDENTIFIER "=" Expression _
 
-  IDENTIFIER    shift, and go to state 51
-  $default      reduce using rule 32 (ParamList)
+  "."           shift, and go to state 28
+  "."           [reduce using rule 29 (Assign)]
+  $default      reduce using rule 29 (Assign)
 
-  ParamList     go to state 50
 
 state 43
 
-  39) Block : "{" _ Expressions "}"
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  30) Assign : CONSTANT "=" Expression _
 
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
+  "."           shift, and go to state 28
+  "."           [reduce using rule 30 (Assign)]
+  $default      reduce using rule 30 (Assign)
 
-  Expression    go to state 3
-  Expressions   go to state 52
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
 
 state 44
 
-  35) Class : A CONSTANT Block _
-
-  $default      reduce using rule 35 (Class)
-
-
-state 45
-
-  36) Class : AN CONSTANT Block _
-
-  $default      reduce using rule 36 (Class)
-
-
-state 46
-
-  37) If : IF Expression Block _
-  38) If : IF Expression Block _ NEWLINE ELSE Block
-
-  NEWLINE       shift, and go to state 53
-  NEWLINE       [reduce using rule 37 (If)]
-  $default      reduce using rule 37 (If)
-
-
-state 47
-
-  23) Call : Expression "." IDENTIFIER "(" _ ArgList ")"
-
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
-  $default      reduce using rule 24 (ArgList)
-
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
-  Expression    go to state 38
-  ArgList       go to state 54
-
-state 48
-
-  21) Call : IDENTIFIER "(" ArgList ")" _
-
-  $default      reduce using rule 21 (Call)
-
-
-state 49
-
-  26) ArgList : ArgList "," _ Expression
-
-  IF            shift, and go to state 21
-  CAN           shift, and go to state 18
-  A             shift, and go to state 19
-  AN            shift, and go to state 20
-  NUMBER        shift, and go to state 11
-  STRING        shift, and go to state 12
-  TRUE          shift, and go to state 13
-  FALSE         shift, and go to state 14
-  NIL           shift, and go to state 15
-  IDENTIFIER    shift, and go to state 16
-  CONSTANT      shift, and go to state 17
-
-  Literal       go to state 4
-  Call          go to state 5
-  Constant      go to state 6
-  Assign        go to state 7
-  Def           go to state 8
-  Class         go to state 9
-  If            go to state 10
-  Expression    go to state 55
-
-state 50
-
-  31) Def : CAN IDENTIFIER "(" ParamList _ ")" Block
-  34) ParamList : ParamList _ "," IDENTIFIER
-
-  ")"           shift, and go to state 56
-  ","           shift, and go to state 57
-
-
-state 51
-
-  33) ParamList : IDENTIFIER _
-
-  $default      reduce using rule 33 (ParamList)
-
-
-state 52
-
-   4) Expressions : Expressions _ Terminator Expression
-   5) Expressions : Expressions _ Terminator
-  39) Block : "{" Expressions _ "}"
-
-  NEWLINE       shift, and go to state 24
-  ";"           shift, and go to state 25
-  "}"           shift, and go to state 58
-
-  Terminator    go to state 23
-
-state 53
-
-  38) If : IF Expression Block NEWLINE _ ELSE Block
-
-  ELSE          shift, and go to state 59
-
-
-state 54
-
-  23) Call : Expression "." IDENTIFIER "(" ArgList _ ")"
-  26) ArgList : ArgList _ "," Expression
-
-  ")"           shift, and go to state 60
-  ","           shift, and go to state 49
-
-
-state 55
-
-  22) Call : Expression _ "." IDENTIFIER
-  23) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
-  26) ArgList : ArgList "," Expression _
-
-  "."           shift, and go to state 26
-  $default      reduce using rule 26 (ArgList)
-
-
-state 56
-
-  31) Def : CAN IDENTIFIER "(" ParamList ")" _ Block
-
-  "{"           shift, and go to state 43
-
-  Block         go to state 61
-
-state 57
-
-  34) ParamList : ParamList "," _ IDENTIFIER
-
-  IDENTIFIER    shift, and go to state 62
-
-
-state 58
-
-  39) Block : "{" Expressions "}" _
-
-  $default      reduce using rule 39 (Block)
-
-
-state 59
-
-  38) If : IF Expression Block NEWLINE ELSE _ Block
-
-  "{"           shift, and go to state 43
-
-  Block         go to state 63
-
-state 60
-
-  23) Call : Expression "." IDENTIFIER "(" ArgList ")" _
-
-  $default      reduce using rule 23 (Call)
-
-
-state 61
-
-  31) Def : CAN IDENTIFIER "(" ParamList ")" Block _
+  31) Def : CAN IDENTIFIER Block _
 
   $default      reduce using rule 31 (Def)
 
 
-state 62
+state 45
 
-  34) ParamList : ParamList "," IDENTIFIER _
+  32) Def : CAN IDENTIFIER "(" _ ParamList ")" Block
+
+  IDENTIFIER    shift, and go to state 55
+  $default      reduce using rule 33 (ParamList)
+
+  ParamList     go to state 54
+
+state 46
+
+  41) Block : "{" _ Expressions "}"
+
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+
+  Expression    go to state 3
+  Expressions   go to state 56
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+
+state 47
+
+  36) Class : A CONSTANT Block _
+
+  $default      reduce using rule 36 (Class)
+
+
+state 48
+
+  37) Class : AN CONSTANT Block _
+
+  $default      reduce using rule 37 (Class)
+
+
+state 49
+
+  38) If : IF Expression Block _
+  39) If : IF Expression Block _ NEWLINE ELSE Block
+
+  NEWLINE       shift, and go to state 57
+  NEWLINE       [reduce using rule 38 (If)]
+  $default      reduce using rule 38 (If)
+
+
+state 50
+
+  40) While : WHILE Expression Block _
+
+  $default      reduce using rule 40 (While)
+
+
+state 51
+
+  24) Call : Expression "." IDENTIFIER "(" _ ArgList ")"
+
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+  $default      reduce using rule 25 (ArgList)
+
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+  Expression    go to state 41
+  ArgList       go to state 58
+
+state 52
+
+  22) Call : IDENTIFIER "(" ArgList ")" _
+
+  $default      reduce using rule 22 (Call)
+
+
+state 53
+
+  27) ArgList : ArgList "," _ Expression
+
+  IF            shift, and go to state 22
+  WHILE         shift, and go to state 23
+  CAN           shift, and go to state 19
+  A             shift, and go to state 20
+  AN            shift, and go to state 21
+  NUMBER        shift, and go to state 12
+  STRING        shift, and go to state 13
+  TRUE          shift, and go to state 14
+  FALSE         shift, and go to state 15
+  NIL           shift, and go to state 16
+  IDENTIFIER    shift, and go to state 17
+  CONSTANT      shift, and go to state 18
+
+  Literal       go to state 4
+  Call          go to state 5
+  Constant      go to state 6
+  Assign        go to state 7
+  Def           go to state 8
+  Class         go to state 9
+  If            go to state 10
+  While         go to state 11
+  Expression    go to state 59
+
+state 54
+
+  32) Def : CAN IDENTIFIER "(" ParamList _ ")" Block
+  35) ParamList : ParamList _ "," IDENTIFIER
+
+  ")"           shift, and go to state 60
+  ","           shift, and go to state 61
+
+
+state 55
+
+  34) ParamList : IDENTIFIER _
 
   $default      reduce using rule 34 (ParamList)
 
 
+state 56
+
+   4) Expressions : Expressions _ Terminator Expression
+   5) Expressions : Expressions _ Terminator
+  41) Block : "{" Expressions _ "}"
+
+  NEWLINE       shift, and go to state 26
+  ";"           shift, and go to state 27
+  "}"           shift, and go to state 62
+
+  Terminator    go to state 25
+
+state 57
+
+  39) If : IF Expression Block NEWLINE _ ELSE Block
+
+  ELSE          shift, and go to state 63
+
+
+state 58
+
+  24) Call : Expression "." IDENTIFIER "(" ArgList _ ")"
+  27) ArgList : ArgList _ "," Expression
+
+  ")"           shift, and go to state 64
+  ","           shift, and go to state 53
+
+
+state 59
+
+  23) Call : Expression _ "." IDENTIFIER
+  24) Call : Expression _ "." IDENTIFIER "(" ArgList ")"
+  27) ArgList : ArgList "," Expression _
+
+  "."           shift, and go to state 28
+  $default      reduce using rule 27 (ArgList)
+
+
+state 60
+
+  32) Def : CAN IDENTIFIER "(" ParamList ")" _ Block
+
+  "{"           shift, and go to state 46
+
+  Block         go to state 65
+
+state 61
+
+  35) ParamList : ParamList "," _ IDENTIFIER
+
+  IDENTIFIER    shift, and go to state 66
+
+
+state 62
+
+  41) Block : "{" Expressions "}" _
+
+  $default      reduce using rule 41 (Block)
+
+
 state 63
 
-  38) If : IF Expression Block NEWLINE ELSE Block _
+  39) If : IF Expression Block NEWLINE ELSE _ Block
 
-  $default      reduce using rule 38 (If)
+  "{"           shift, and go to state 46
+
+  Block         go to state 67
+
+state 64
+
+  24) Call : Expression "." IDENTIFIER "(" ArgList ")" _
+
+  $default      reduce using rule 24 (Call)
+
+
+state 65
+
+  32) Def : CAN IDENTIFIER "(" ParamList ")" Block _
+
+  $default      reduce using rule 32 (Def)
+
+
+state 66
+
+  35) ParamList : ParamList "," IDENTIFIER _
+
+  $default      reduce using rule 35 (ParamList)
+
+
+state 67
+
+  39) If : IF Expression Block NEWLINE ELSE Block _
+
+  $default      reduce using rule 39 (If)
 

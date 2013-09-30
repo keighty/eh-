@@ -133,3 +133,16 @@ class IfNode
     end
   end
 end
+
+class WhileNode
+  def initialize(condition, body)
+    @condition = condition
+    @body = body
+  end
+
+  def eval(context)
+    while @condition.eval(context).ruby_value
+      @body.eval(context)
+    end
+  end
+end
