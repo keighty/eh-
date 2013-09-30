@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'fixtures'
 
 describe "Lexer" do
 
@@ -26,14 +25,14 @@ describe "Lexer" do
     @lex.tokenize("True").should eq [[:CONSTANT, "True"]]
   end
 
-  it 'should tokenize say or puts commands' do
-    @lex.tokenize("say 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
-    @lex.tokenize("puts 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
-  end
-
   it 'should tokenize block indicators' do
     @lex.tokenize(":\n").should eq [["{", "{"]]
     @lex.tokenize("eh?\n").should eq [["}", "}"]]
     expect(@lex.tokenize(FULL_CLASS)).not_to include [:IDENTIFIER, "eh"]
+  end
+
+  it 'should tokenize say or puts commands' do
+    @lex.tokenize("say 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
+    @lex.tokenize("puts 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
   end
 end
