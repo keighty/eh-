@@ -38,6 +38,6 @@ describe "Lexer" do
 
   it 'should tokenize operations' do
     @lex.tokenize("1 + 2").should eq [[:NUMBER, 1],["+","+"], [:NUMBER, 2]]
-    @lex.tokenize("1+2").should eq [[:NUMBER, 1],["+","+"], [:NUMBER, 2]]
+    @lex.tokenize("1-2").should eq [[:NUMBER, 1],["-","-"], [:NUMBER, 2]]
   end
 end
