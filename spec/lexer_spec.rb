@@ -35,4 +35,9 @@ describe "Lexer" do
     @lex.tokenize("say 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
     @lex.tokenize("puts 'hello'").should eq [[:IDENTIFIER, "print"], [:STRING, "hello"]]
   end
+
+  it 'should tokenize operations' do
+    @lex.tokenize("1 + 2").should eq [[:NUMBER, 1],["+","+"], [:NUMBER, 2]]
+    @lex.tokenize("1+2").should eq [[:NUMBER, 1],["+","+"], [:NUMBER, 2]]
+  end
 end
